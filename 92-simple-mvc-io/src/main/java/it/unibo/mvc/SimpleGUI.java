@@ -5,6 +5,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,12 +23,12 @@ public final class SimpleGUI {
 
     public SimpleGUI() {
         final JPanel pano = new JPanel();
-        frame.setLayout(new BorderLayout());
+        pano.setLayout(new BorderLayout());
         final JTextArea testo = new JTextArea();
         final JButton save = new JButton("Save");
-        frame.setContentPane(pano);
-        pano.add(testo);
+        pano.add(testo, BorderLayout.CENTER);
         pano.add(save, BorderLayout.SOUTH);
+        frame.setContentPane(pano);
 
         save.addActionListener(new ActionListener() {
 
@@ -36,8 +38,11 @@ public final class SimpleGUI {
             }
             
         });
+
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
