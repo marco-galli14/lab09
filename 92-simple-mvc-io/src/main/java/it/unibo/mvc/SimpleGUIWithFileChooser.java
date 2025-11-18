@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 /**
  * A very simple program using a graphical interface.
  * 
@@ -26,6 +25,9 @@ public final class SimpleGUIWithFileChooser {
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
 
+    /**
+     * Constructor of a SimpleGUIWithFileChooser, sets all the graphical interface.
+     */
     public SimpleGUIWithFileChooser() {
         final JPanel pano = new JPanel();
         final JPanel superiore = new JPanel();
@@ -43,45 +45,56 @@ public final class SimpleGUIWithFileChooser {
         superiore.add(browse, BorderLayout.LINE_END);
         pano.add(superiore, BorderLayout.NORTH);
         frame.setContentPane(pano);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final JFileChooser scelta = new JFileChooser(controller.getFile());
 
         browse.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                int i = scelta.showSaveDialog(browse);
+            public void actionPerformed(final ActionEvent e) {
+                final int i = scelta.showSaveDialog(browse);
                 if (i == JFileChooser.APPROVE_OPTION) {
                     controller.setFile(scelta.getSelectedFile());
                     campo.setText(controller.getPath().toString());
                     frame.repaint();
                 } else if (i == JFileChooser.CANCEL_OPTION) {
-
+                    frame.repaint();
                 } else {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            
+
         });
 
         save.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.writeString(testo.getText());
             }
-            
+
         });
 
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new SimpleGUIWithFileChooser();
+    private void display() {
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+
+    /**
+     * @param args ignored.
+     */
+    public static void main(final String... args) {
+        new SimpleGUIWithFileChooser().display(); 
     }
 
 }

@@ -21,6 +21,9 @@ public final class SimpleGUI {
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
 
+    /**
+     * Constructor of a SimpleGUI, sets all the graphical interface.
+     */
     public SimpleGUI() {
         final JPanel pano = new JPanel();
         pano.setLayout(new BorderLayout());
@@ -29,25 +32,31 @@ public final class SimpleGUI {
         pano.add(testo, BorderLayout.CENTER);
         pano.add(save, BorderLayout.SOUTH);
         frame.setContentPane(pano);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         save.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 controller.writeString(testo.getText());
             }
-            
+
         });
 
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    }
+
+    private void display() {
+        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new SimpleGUI();
+    /**
+     * @param args ignored.
+     */
+    public static void main(final String... args) {
+        new SimpleGUI().display();
     }
 
 }
