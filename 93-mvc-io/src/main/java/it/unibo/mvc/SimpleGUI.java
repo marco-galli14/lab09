@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * A very simple program using a graphical interface.
@@ -19,7 +21,11 @@ public final class SimpleGUI {
     private static final int PROPORTION = 3;
 
     private final JFrame frame = new JFrame();
+    private final Controller controller = new SimpleController();
 
+    /**
+     * Creates the graphical iterface from the start.
+     */
     public SimpleGUI() {
         final JPanel pano = new JPanel();
         final JPanel appo = new JPanel();
@@ -37,8 +43,34 @@ public final class SimpleGUI {
         frame.setContentPane(pano);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        print.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                controller.setString(campo.getText());
+                System.out.println(controller.getNextString()); // NOPMD
+            }
+
+        });
+
+        show.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                String ris = "";
+                for (final String elem : controller.getHistory()) {
+                    ris = ris.concat(elem.concat("\n"));
+                }
+                area.setText(ris);
+            }
+
+        });
     }
 
+    /**
+     * Display the frame.
+     */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
@@ -48,7 +80,7 @@ public final class SimpleGUI {
     /**
      * @param args ignored.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         new SimpleGUI().display();
     }
 

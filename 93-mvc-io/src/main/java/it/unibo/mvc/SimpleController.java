@@ -10,7 +10,7 @@ import java.util.List;
 public final class SimpleController implements Controller {
 
     private String str;
-    private List<String> history;
+    private final List<String> history;
 
     /**
      * Create a new SimpleController: sets the current string as null and create the history List<String>.
@@ -21,8 +21,13 @@ public final class SimpleController implements Controller {
     }
 
     @Override
-    public void setString(String str) throws IllegalArgumentException{
-        this.str = str;
+    public void setString(final String stringa) {
+        try {
+            this.str = stringa;
+        } catch (final IllegalArgumentException e) {
+            System.err.println(e); // NOPMD
+        }
+        this.history.add(str);
     }
 
     @Override
@@ -32,12 +37,18 @@ public final class SimpleController implements Controller {
 
     @Override
     public List<String> getHistory() {
-        return this.history;
+        final List<String> ris = new LinkedList<>();
+        ris.addAll(this.history);
+        return ris;
     }
 
     @Override
-    public void printCurrentString() throws IllegalStateException {
-        System.out.println(this.str);
+    public void printCurrentString() {
+        try {
+            System.out.println(this.str); // NOPMD
+        } catch (final IllegalStateException e) {
+            System.err.println(e); // NOPMD
+        }
     }
 
 }

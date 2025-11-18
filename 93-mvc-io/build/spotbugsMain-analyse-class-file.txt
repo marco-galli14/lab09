@@ -1,0 +1,5 @@
+C:\Users\marco\Desktop\marco\università\programmazione ad oggetti\CODE\lab09\93-mvc-io\build\classes\java\main\it\unibo\mvc\Controller.class
+C:\Users\marco\Desktop\marco\università\programmazione ad oggetti\CODE\lab09\93-mvc-io\build\classes\java\main\it\unibo\mvc\SimpleController.class
+C:\Users\marco\Desktop\marco\università\programmazione ad oggetti\CODE\lab09\93-mvc-io\build\classes\java\main\it\unibo\mvc\SimpleGUI$1.class
+C:\Users\marco\Desktop\marco\università\programmazione ad oggetti\CODE\lab09\93-mvc-io\build\classes\java\main\it\unibo\mvc\SimpleGUI$2.class
+C:\Users\marco\Desktop\marco\università\programmazione ad oggetti\CODE\lab09\93-mvc-io\build\classes\java\main\it\unibo\mvc\SimpleGUI.class

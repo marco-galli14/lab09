@@ -9,10 +9,12 @@ public interface Controller {
 
     /**
      * Sets the next string to print.
+     * 
      * @param str the next string to print.
+     * 
      * @throws IllegalArgumentException if str is null.
      */
-    void setString(String str) throws IllegalArgumentException;
+    void setString(String str);
 
     /**
      * @return the next string to print.
@@ -26,7 +28,8 @@ public interface Controller {
 
     /**
      * Prints the current string.
+     * 
      * @throws IllegalStateException if the current string is unset.
      */
-    void printCurrentString() throws IllegalStateException;
+    void printCurrentString();
 }
