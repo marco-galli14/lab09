@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -41,6 +43,26 @@ public final class SimpleGUIWithFileChooser {
         superiore.add(browse, BorderLayout.LINE_END);
         pano.add(superiore, BorderLayout.NORTH);
         frame.setContentPane(pano);
+
+        final JFileChooser scelta = new JFileChooser(controller.getFile());
+
+        browse.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = scelta.showSaveDialog(browse);
+                if (i == JFileChooser.APPROVE_OPTION) {
+                    controller.setFile(scelta.getSelectedFile());
+                    campo.setText(controller.getPath().toString());
+                    frame.repaint();
+                } else if (i == JFileChooser.CANCEL_OPTION) {
+
+                } else {
+                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+        });
 
         save.addActionListener(new ActionListener() {
 
