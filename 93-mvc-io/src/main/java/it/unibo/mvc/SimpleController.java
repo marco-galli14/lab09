@@ -16,17 +16,17 @@ public final class SimpleController implements Controller {
      * Create a new SimpleController: sets the current string as null and create the history List<String>.
      */
     public SimpleController() {
-        this.str = null;
+        this.str = "";
         this.history = new LinkedList<>();
     }
 
     @Override
     public void setString(final String stringa) {
-        if (stringa != null) {
+        if (!"".equals(stringa)) {
             this.str = stringa;
             this.history.add(str);
         } else {
-            throw new IllegalStateException("Stringa cannot be null");
+            throw new IllegalStateException("stringa cannot be null");
         }
 
     }
@@ -45,10 +45,10 @@ public final class SimpleController implements Controller {
 
     @Override
     public void printCurrentString() {
-        if (this.str != null) {
+        if (!"".equals(this.str)) {
             System.out.println(this.str); // NOPMD
         } else {
-            throw new IllegalStateException("There's no current string");
+            throw new IllegalStateException("there's no current string");
         }
     }
 

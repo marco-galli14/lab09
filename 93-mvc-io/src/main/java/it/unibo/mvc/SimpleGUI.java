@@ -32,7 +32,7 @@ public final class SimpleGUI {
         final JPanel appo = new JPanel();
         pano.setLayout(new BorderLayout());
         appo.setLayout(new BorderLayout());
-        final JTextField campo = new JTextField(null);
+        final JTextField campo = new JTextField("");
         final JTextArea area = new JTextArea();
         final JButton print = new JButton("Print");
         final JButton show = new JButton("Show history");
