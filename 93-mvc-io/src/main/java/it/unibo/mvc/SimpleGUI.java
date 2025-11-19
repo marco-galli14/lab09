@@ -2,6 +2,7 @@ package it.unibo.mvc;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -31,7 +32,7 @@ public final class SimpleGUI {
         final JPanel appo = new JPanel();
         pano.setLayout(new BorderLayout());
         appo.setLayout(new BorderLayout());
-        final JTextField campo = new JTextField();
+        final JTextField campo = new JTextField(null);
         final JTextArea area = new JTextArea();
         final JButton print = new JButton("Print");
         final JButton show = new JButton("Show history");
@@ -47,9 +48,18 @@ public final class SimpleGUI {
         print.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(final ActionEvent e) {
-                controller.setString(campo.getText());
-                System.out.println(controller.getNextString()); // NOPMD
+            public void actionPerformed(final ActionEvent action) {
+                try {
+                    controller.setString(campo.getText());
+                } catch (final IllegalStateException e) {
+                    JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                try {
+                    controller.printCurrentString();
+                } catch (final IllegalStateException err) {
+                    JOptionPane.showMessageDialog(frame, err, "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         });
@@ -74,6 +84,7 @@ public final class SimpleGUI {
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize((int) screen.getWidth() / PROPORTION, (int) screen.getHeight() / PROPORTION);
+        frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 

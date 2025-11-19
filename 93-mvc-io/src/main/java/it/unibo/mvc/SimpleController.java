@@ -22,12 +22,13 @@ public final class SimpleController implements Controller {
 
     @Override
     public void setString(final String stringa) {
-        try {
+        if (stringa != null) {
             this.str = stringa;
-        } catch (final IllegalArgumentException e) {
-            System.err.println(e); // NOPMD
+            this.history.add(str);
+        } else {
+            throw new IllegalStateException("Stringa cannot be null");
         }
-        this.history.add(str);
+
     }
 
     @Override
@@ -44,10 +45,10 @@ public final class SimpleController implements Controller {
 
     @Override
     public void printCurrentString() {
-        try {
+        if (this.str != null) {
             System.out.println(this.str); // NOPMD
-        } catch (final IllegalStateException e) {
-            System.err.println(e); // NOPMD
+        } else {
+            throw new IllegalStateException("There's no current string");
         }
     }
 
